@@ -18,5 +18,8 @@ public class ResourceTester {
         for (Resource r : array) {
             System.out.println("The resource " + r + " has a price of " + r.getPrice());
         }
+        for (Resource r : Resource.values()) {
+            System.out.println("The resource " + r + " has a price of " + r.getPrice());
+        }
     }
 }

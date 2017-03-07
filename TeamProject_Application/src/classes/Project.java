@@ -10,6 +10,7 @@ package classes;
  * @author l0011
  */
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Project {
 
@@ -20,13 +21,18 @@ public class Project {
     private String name;
     private Date startDate;
     private Date endDate;
-    //private int noOfTasks = 0;
     private double cost;
-    //private int noOfEmployees = 0;
     private double duration;
     private ArrayList<Task> tasks = new ArrayList<>();
-    //private ArrayList<Integer> idList = new ArrayList<Integer>();
 
+    public Project(int id){
+        projectID = nextProjectID++;
+        customerID = id;
+        name = "";
+        startDate = new Date();
+        cost = 0;
+        duration = 0;
+    }
     /**
      * Constructor for project
      *
@@ -83,8 +89,6 @@ public class Project {
     }
 
     public Date getEndDate() {
-        // get end date of last task
-        endDate = tasks.get(tasks.size()-1).getEndDate();
         return endDate; 
     }
     
@@ -133,6 +137,11 @@ public class Project {
             duration += t.getCalculatedTime();
         }
     }
+    
+    private void calcEndDate(){
+        // get end date of last task
+        endDate = tasks.get(tasks.size()-1).getEndDate();
+    }
 
 //    public Date calculateEndDate() {
 //        //endDate = startDate;
@@ -154,5 +163,41 @@ public class Project {
     public void printTasks(){
         for(Task t: tasks)
             System.out.println(t.toString());
+    }
+    
+    public void read(){
+        Scanner in = new Scanner(System.in);
+        boolean valid = false;
+        char sentinel;
+        Task task;
+        do {
+            try {
+                System.out.println("\tENTER PROJECT DETAILS");
+                System.out.print("ENTER NAME: ");
+                setName(in.nextLine());
+                startDate.read();
+                do {
+                    // if task list is empty, 
+                    // then create task with same start date as project
+                    if(tasks.isEmpty())
+                        task = new Task(startDate);
+                    // otherwise create task with start date
+                    // same as end date of last task in list
+                    else
+                        task = new Task(tasks.get(tasks.size()-1).getEndDate());
+                    task.read();
+                    tasks.add(task);
+                    System.out.print("Do you want to add another task? [Y|N] ");
+                    sentinel = in.next().charAt(0);
+                } while (!(sentinel == 'N' || sentinel == 'n'));
+                calculateDuration();
+                calcEndDate();
+                valid = true;
+            } catch (IllegalArgumentException iae) {
+                System.out.println(iae.getMessage());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!valid);
     }
 }

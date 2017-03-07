@@ -18,10 +18,10 @@ import java.util.Scanner;
 public class ProjectTester {
     public static void main(String[] args){
         Scanner in = new Scanner(System.in);
-        int option = 0;
-        String name = "", type = "", res = "";
-        int duration = 0;
-        Resource resource = null;
+        int option;
+        String name, type, res;
+        int duration;
+        Resource resource;
         Date start = new Date(6, 3, 2017);
         Task task = new Task(1, "Plumbing", "Phase 1", start, 5, Resource.PLUMBER);
         Project pro = new Project(1, "House", start, task);
