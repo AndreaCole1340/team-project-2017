@@ -110,6 +110,8 @@ public class TaskDBHandler {
     }
     
     private void openConnection(){
+        if(conn != null)
+            return;
         try {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL, username, password);
