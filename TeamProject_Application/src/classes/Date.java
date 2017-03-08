@@ -14,7 +14,7 @@ public class Date {
     // Methods
     // Constructors
     public Date() {
-        day = month = year = 0;
+        day = month = year = 1;
     }
 
     public Date(int day, int month, int year) throws IllegalArgumentException {
@@ -134,7 +134,7 @@ public class Date {
         boolean valid = false;
         do {
             try {
-                System.out.println("ENTER DATE\n");
+                System.out.println("\tENTER DATE");
                 System.out.print("ENTER YEAR: ");
                 setYear(Integer.parseInt(in.nextLine()));
                 System.out.print("ENTER MONTH: ");
@@ -191,4 +191,15 @@ public class Date {
         return month31.contains(month);
     }
 
+    public static Date valueOf(String data) throws IllegalArgumentException{
+        if(data.length() != 10)
+            throw new IllegalArgumentException("Please enter date string in format \"YYYY-MM-DD\"");
+        else{
+            String[] arr = {data.substring(0, 4), data.substring(5, 7), data.substring(8, 10)};
+            int year = Integer.parseInt(arr[0]);
+            int month = Integer.parseInt(arr[1]);
+            int day = Integer.parseInt(arr[2]);
+            return new Date(day, month, year);
+        }
+    }
 }
