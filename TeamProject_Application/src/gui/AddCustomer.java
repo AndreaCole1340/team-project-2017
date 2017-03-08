@@ -15,7 +15,7 @@ import java.awt.Color;
 import javax.swing.JTextField;
 
 import classes.Customer;
-import daoCustomer.CustomerDBHandler;
+import dao.CustomerDBHandler;
 
 import javax.swing.JRadioButton;
 
@@ -141,7 +141,7 @@ public class AddCustomer extends JFrame {
                     type = "Professional";
                 }
             }
-            CustomerDBHandler db = new CustomerDBHandler();
+            CustomerDBHandler db = new CustomerDBHandler("remoteuser", "password");
             Customer c = new Customer(name, type, address, contact);
             db.write(c);
         }

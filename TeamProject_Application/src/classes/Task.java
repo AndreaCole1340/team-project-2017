@@ -87,7 +87,7 @@ public class Task {
         return totalDuration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(double duration) {
         this.totalDuration = duration;
     }
 
@@ -180,6 +180,7 @@ public class Task {
      * Method to calculate total cost of task
      */
     private void calculateCost() {
+        cost = 0;
         for (Resource r : resourcesAssigned) {
             // calculate price of each resource per day
             cost += r.getPrice();
@@ -217,7 +218,7 @@ public class Task {
                 System.out.print("ENTER TYPE: ");
                 setType(in.nextLine());
                 System.out.print("ENTER DURATION: ");
-                setDuration(Integer.parseInt(in.nextLine()));
+                setDuration(Double.parseDouble(in.nextLine()));
                 //startDate.read();
                 do {
                     System.out.print("ENTER RESOURCE: ");
@@ -271,9 +272,7 @@ public class Task {
         } while (!valid);
     }
 
-//    public boolean hasPrevious(){
-//        if(previous != null)
-//            return true;
-//        return false;
-//    }
+    public static void setNextID(int id){
+        nextTaskID = id;
+    }
 }

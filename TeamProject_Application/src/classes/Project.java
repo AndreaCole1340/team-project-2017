@@ -126,7 +126,6 @@ public class Project {
     private void calculateCost() {
         for (Task t : tasks) {
             // calculate price of each task in project
-            //t.calculateCost();
             cost += t.getCost();
         }
     }
@@ -157,7 +156,8 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" + "projectID=" + projectID + ", customerID=" + customerID + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", cost=" + cost + ", duration=" + duration + '}';
+        //calculateCost();
+        return "Project{" + "projectID=" + projectID + ", customerID=" + customerID + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", cost=" + getCost() + ", duration=" + duration + '}';
     }
 
     public void printTasks(){
@@ -183,8 +183,11 @@ public class Project {
                         task = new Task(startDate);
                     // otherwise create task with start date
                     // same as end date of last task in list
-                    else
-                        task = new Task(tasks.get(tasks.size()-1).getEndDate());
+                    else{
+                        Date temp = tasks.get(tasks.size()-1).getEndDate();
+                        
+                        task = new Task(temp);
+                    }
                     task.read();
                     tasks.add(task);
                     System.out.print("Do you want to add another task? [Y|N] ");
