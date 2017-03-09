@@ -25,7 +25,7 @@ public class TaskDBHandler {
 // JDBC Driver name and database URL
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     // amazon address = ec2-34-251-86-35.eu-west-1.compute.amazonaws.com:3306
-    private static final String DB_URL = "jdbc:mysql://ec2-34-251-86-35.eu-west-1.compute.amazonaws.com:3306"
+    private static final String DB_URL = "jdbc:mysql://ec2-34-250-81-167.eu-west-1.compute.amazonaws.com:3306"
             + "/project_planner?autoReconnect=true&useSSL=false";
     private static String username;
     private static String password;
