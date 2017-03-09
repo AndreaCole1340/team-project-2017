@@ -90,6 +90,10 @@ public class Task {
     public void setDuration(double duration) {
         this.totalDuration = duration;
     }
+    
+    public Date getStartDate(){
+        return startDate;
+    }
 
     public Date getEndDate() {
         calcTime();
@@ -274,5 +278,11 @@ public class Task {
 
     public static void setNextID(int id){
         nextTaskID = id;
+    }
+    
+    public int getResources(){
+        if(!resourcesAssigned.isEmpty())
+            return resourcesAssigned.size();
+        return -1;
     }
 }

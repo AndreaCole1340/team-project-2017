@@ -110,7 +110,7 @@ public class Date {
     // toString and equals
     @Override
     public String toString() {
-        return day + " / " + month + " / " + year;
+        return year + "-" + ((month < 10)?"0":"") + month + "-" + ((day < 10)?"0":"" + day);
     }
 
     @Override
