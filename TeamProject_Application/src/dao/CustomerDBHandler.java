@@ -34,7 +34,8 @@ public class CustomerDBHandler {
             ResultSet rs = stmt.executeQuery(query);
             Customer.setNextID(id);
             rs.next();
-            c = new Customer(rs.getString("Name"), rs.getString("Type"), rs.getString("Address"), rs.getString("Contact"));
+            c = new Customer(rs.getString("Name"), rs.getString("Type"), rs.getString("Number"), rs.getString("Street"), 
+                    rs.getString("Town"), rs.getString("County"), rs.getString("PhoneNo"), rs.getString("Email"));
         } catch (SQLException e) {
             System.out.println("Problem with SQL.\n" + e.getMessage());
         } catch (Exception e) {
@@ -49,7 +50,8 @@ public class CustomerDBHandler {
         openConnection();
         if (c != null) {
             try {
-                String query = makeInsertQuery(c.getName(), c.getAddress(), c.getContactDetails(), c.getType());
+                String query = makeInsertQuery(c.getName(), c.getType(), c.getNumber(), c.getStreet(), c.getTown(), c.getCounty(),
+                c.getPhoneNo(), c.getEmail());
                 stmt.executeQuery("USE project_planner;");
                 stmt.executeUpdate(query);
                 System.out.println("success...written to db");
@@ -70,8 +72,10 @@ public class CustomerDBHandler {
         return select;
     }
 
-    private static String makeInsertQuery(String name, String address, String contact, String type) {
-        String insert = "INSERT INTO customers (Name, Address, Contact, Type) VALUES ('" + name + "', '" + address + "', '" + contact + "', '" + type + "');";
+    private static String makeInsertQuery(String name, String type, String number, String street, 
+            String town, String county, String phoneNo, String email) {
+        String insert = "INSERT INTO customers (Name, Type, Number, Street, Town, County, PhoneNo, Email) VALUES ('" + name + "', '" + type + "', '" 
+                + number + "', '" +street + "', '" +town+"', '"+county+"', '"+phoneNo+"', '"+ email+");";
 
         return insert;
     }
@@ -81,9 +85,13 @@ public class CustomerDBHandler {
         String createTable = "CREATE TABLE IF NOT EXISTS customers "
                 + "(CustomerID INTEGER auto_increment not NULL, "
                 + " Name VARCHAR(255), "
-                + " Address VARCHAR(255), "
-                + " Contact VARCHAR(255), "
                 + " Type VARCHAR(255), "
+                + " Number VARCHAR(255), "
+                + " Street VARCHAR(255), "
+                + " Town VARCHAR(255), "
+                + " County VARCHAR(255), "
+                + " PhoneNo VARCHAR(255), "
+                + " Email VARCHAR(255), "
                 + " PRIMARY KEY ( CustomerID ))";
         //create customer table
         try {

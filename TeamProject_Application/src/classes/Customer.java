@@ -7,15 +7,23 @@ public class Customer {
     private int customerID;
     private String name;
     private String type;
-    private String address;
-    private String contactDetails;
+    private String number;
+    private String street;
+    private String town;
+    private String county;
+    private String phoneNo;
+    private String email;
 
-    public Customer(String name, String type, String address, String contact) {
+    public Customer(String name, String type, String number, String street, String town, String county, String phoneNo, String email) {
         customerID = nextCustID++;
         this.name = name;
         this.type = type;
-        this.address = address;
-        this.contactDetails = contact;
+        this.number = number;
+        this.street = street;
+        this.town = town;
+        this.county = county;
+        this.phoneNo = phoneNo;
+        this.email = email;
     }
 
     public String getName() {
@@ -34,30 +42,50 @@ public class Customer {
         this.type = type;
     }
 
-    public String getContactDetails() {
-        return contactDetails;
+    public String getPhoneNo() {
+        return phoneNo;
     }
 
-    public void setContactDetails(String contactDetails) {
-        this.contactDetails = contactDetails;
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 
     public int getCustomerID() {
         return customerID;
     }
 
-    public String getAddress() {
-        return address;
+    public String getNumber() {
+        return this.number;
+    }
+    
+    public String getTown(){
+        return this.town;
+    }
+    
+    public String getStreet(){
+        return this.street;
+    }
+    
+    public String getCounty(){
+        return this.county;
+    }
+    
+    public String getEmail(){
+        return email;
+    }
+    
+    public void setEmail(String email){
+        this.email = email;
     }
 
     public static void setNextID(int id) {
         nextCustID = id;
     }
-
+    
     @Override
     public String toString() {
-        return "Customer [customerID=" + customerID + ", name=" + name + ", type=" + type + ", address=" + address
-                + ", contactDetails=" + contactDetails + "]";
+        return "Customer [customerID=" + customerID + ", name=" + name + ", type=" + type + ", number=" + number + ", street"
+                + street+", town "+ town+ ", county " +county+ ", phoneNo=" + phoneNo +", Email="+ email+ "]";
     }
-
 }
+Name
