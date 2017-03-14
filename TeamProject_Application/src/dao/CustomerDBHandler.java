@@ -23,7 +23,7 @@ public class CustomerDBHandler {
 
     public CustomerDBHandler(String user, String password) {
         username = user;
-        this.password = password;
+        CustomerDBHandler.password = password;
     }
 
     public Customer read(int id) {
