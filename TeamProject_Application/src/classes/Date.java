@@ -3,6 +3,8 @@ package classes;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 public class Date {
     // Properties
@@ -127,6 +129,13 @@ public class Date {
         return false;
     }
 
+    public static int getDifference(Date start, Date end){
+        DateTime d1 = new DateTime(start.getDay(), start.getMonth(), start.getYear(), 0, 0);
+        DateTime d2 = new DateTime(end.getDay(), end.getMonth(), end.getYear(), 0, 0);
+        
+        int days = Days.daysBetween(d1, d2).getDays();
+        return days;
+    }
     // Take user input
     public void read() {
         @SuppressWarnings("resource")

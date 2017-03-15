@@ -25,7 +25,7 @@ public class Project {
     private double duration;
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    public Project(int id){
+    public Project(int id) {
         projectID = nextProjectID++;
         customerID = id;
         name = "";
@@ -33,6 +33,7 @@ public class Project {
         cost = 0;
         duration = 0;
     }
+
     /**
      * Constructor for project
      *
@@ -88,15 +89,21 @@ public class Project {
         return startDate;
     }
 
-    public Date getEndDate() {
-        return endDate; 
+    public double getDuration() {
+        calculateDuration();
+        return duration;
     }
-    
+
+    public Date getEndDate() {
+        calcEndDate();
+        return endDate;
+    }
+
     /**
      * Accessor method for endDate
      *
      * @param task
-     */ 
+     */
     public void assignTask(Task task) {
         tasks.add(task);
     }
@@ -124,6 +131,7 @@ public class Project {
      * Method to calculate cost
      */
     private void calculateCost() {
+        cost = 0;
         for (Task t : tasks) {
             // calculate price of each task in project
             cost += t.getCost();
@@ -136,10 +144,10 @@ public class Project {
             duration += t.getCalculatedTime();
         }
     }
-    
-    private void calcEndDate(){
+
+    private void calcEndDate() {
         // get end date of last task
-        endDate = tasks.get(tasks.size()-1).getEndDate();
+        endDate = tasks.get(tasks.size() - 1).getEndDate();
     }
 
 //    public Date calculateEndDate() {
@@ -149,7 +157,6 @@ public class Project {
 //        }
 //        return endDate;
 //    }
-
     public int getCustomerID() {
         return customerID;
     }
@@ -160,12 +167,13 @@ public class Project {
         return "Project{" + "projectID=" + projectID + ", customerID=" + customerID + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", cost=" + getCost() + ", duration=" + duration + '}';
     }
 
-    public void printTasks(){
-        for(Task t: tasks)
+    public void printTasks() {
+        for (Task t : tasks) {
             System.out.println(t.toString());
+        }
     }
-    
-    public void read(){
+
+    public void read() {
         Scanner in = new Scanner(System.in);
         boolean valid = false;
         char sentinel;
@@ -179,13 +187,13 @@ public class Project {
                 do {
                     // if task list is empty, 
                     // then create task with same start date as project
-                    if(tasks.isEmpty())
+                    if (tasks.isEmpty()) {
                         task = new Task(startDate);
-                    // otherwise create task with start date
+                    } // otherwise create task with start date
                     // same as end date of last task in list
-                    else{
-                        Date temp = tasks.get(tasks.size()-1).getEndDate();
-                        
+                    else {
+                        Date temp = tasks.get(tasks.size() - 1).getEndDate();
+
                         task = new Task(temp);
                     }
                     task.read();

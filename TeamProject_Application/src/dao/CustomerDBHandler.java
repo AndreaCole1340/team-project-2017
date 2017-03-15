@@ -8,22 +8,10 @@ import java.sql.Statement;
 
 import classes.Customer;
 
-public class CustomerDBHandler {
-
-    // JDBC Driver name and database URL
-    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    // amazon address = ec2-34-251-86-35.eu-west-1.compute.amazonaws.com:3306
-    // private vm = NAT: 192.168.20.137  VMNet1: 192.168.10.130
-    private static final String DB_URL = "jdbc:mysql://ec2-34-250-81-167.eu-west-1.compute.amazonaws.com:3306"
-            + "/project_planner?autoReconnect=true&useSSL=false";
-    private static String username;
-    private static String password;
-    private Statement stmt;
-    private Connection conn;
+public class CustomerDBHandler extends DBHandler {
 
     public CustomerDBHandler(String user, String password) {
-        username = user;
-        CustomerDBHandler.password = password;
+        super(user, password);
     }
 
     public Customer read(int id) {
@@ -39,7 +27,7 @@ public class CustomerDBHandler {
             System.out.println("Problem with SQL.\n" + e.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }finally{
+        } finally {
             closeConnection();
         }
         return c;
@@ -90,28 +78,6 @@ public class CustomerDBHandler {
             stmt.executeUpdate(createTable);
         } catch (SQLException e) {
             System.out.println("Table not created. " + e.getMessage());
-        }
-    }
-    
-    private void openConnection(){
-        try {
-            Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL, username, password);
-            stmt = conn.createStatement();
-        } catch (SQLException e) {
-            System.out.println("Problem with SQL. " + e.getMessage());
-        } catch (ClassNotFoundException e) {
-            System.out.println("Problem with driver. " + e.getMessage());
-        }
-    }
-    
-    private void closeConnection(){
-        if(conn != null){
-            try{
-                conn.close();
-            }catch(SQLException e){
-                System.out.println("Connection not closed. " + e.getMessage());
-            }
         }
     }
 }
