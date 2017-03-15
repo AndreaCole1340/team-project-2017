@@ -88,4 +88,3 @@ public class Customer {
                 + street+", town "+ town+ ", county " +county+ ", phoneNo=" + phoneNo +", Email="+ email+ "]";
     }
 }
-Name
